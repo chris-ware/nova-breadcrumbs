@@ -7,7 +7,6 @@ use Laravel\Nova\Tool;
 
 class NovaBreadcrumbs extends Tool
 {
-
     protected $loadStyles = true;
 
     /**
@@ -25,7 +24,6 @@ class NovaBreadcrumbs extends Tool
 
     /**
      * Build the view that renders the navigation links for the tool.
-     *
      */
     public function renderNavigation()
     {
@@ -35,6 +33,7 @@ class NovaBreadcrumbs extends Tool
     public function withoutStyles()
     {
         $this->loadStyles = false;
+
         return $this;
     }
 }
