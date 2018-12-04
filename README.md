@@ -32,6 +32,16 @@ public function tools()
 }
 ```
 
+Finally, add the Breadcrumbs trait to your App\Nova\Resource class.
+
+```php
+use ChrisWare\NovaBreadcrumbs\Traits\Breadcrumbs;
+
+abstract class Resource extends NovaResource
+{
+    use Breadcrumbs;
+```
+
 ## Customisation
 
 You can disable the bundled styles and load your own by adding the following method to the call:

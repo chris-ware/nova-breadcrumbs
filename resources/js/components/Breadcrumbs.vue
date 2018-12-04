@@ -27,7 +27,7 @@
                             : "/" + path,
                         text: isNaN(path) ? path.replace('-', ' ').replace(/(?:^|\s)\S/g, function (a) {
                             return a.toUpperCase();
-                        }) : 'Detail',
+                        }) : this.resource.title,
                     });
                     return breadcrumbArray;
                 }, []);
