@@ -22,7 +22,29 @@ public function tools()
 {
     return [
         // ...
-        new \ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs,
+        \ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs()::make,
     ];
 }
 ```
+
+## Customisation
+
+You can disable the bundled styles and load your own by adding the following method to the call:
+
+```php
+// in app/Providers/NovaServiceProvder.php
+
+// ...
+public function tools()
+{
+    return [
+        // ...
+        \ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs()::make()->withoutStyles(),
+    ];
+}
+```
+## Information
+
+This package only works on the index and detail pages currently, as these are the onyl Vue components that have customisable headers. The detail page only shows a link name of Detail, although the intention is to replace this with the Resource name in given time.
+
+There are 2 new custom Vue components that are introduced for extensibility, for both sets of views. They are custom-{view}-pre-breadcrumbs and custom-{view}-post-breadcrumbs, where view is either index or detail.

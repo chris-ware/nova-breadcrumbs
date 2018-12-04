@@ -18,19 +18,19 @@
         computed: {
             crumbs: function () {
                 let pathArray = this.$router.currentRoute.path.split('/');
-                pathArray.shift()
-                let breadcrumbs = pathArray.reduce((breadcrumbArray, path, idx) => {
+                pathArray.shift();
+                return pathArray.reduce((breadcrumbArray, path, idx) => {
                     breadcrumbArray.push({
                         path: path,
                         to: breadcrumbArray[idx - 1]
                             ? breadcrumbArray[idx - 1].to + "/" + path
                             : "/" + path,
-                        text: isNaN(path) ? path.charAt(0).toUpperCase() + path.slice(1) : 'Detail',
+                        text: isNaN(path) ? path.replace('-', ' ').replace(/(?:^|\s)\S/g, function (a) {
+                            return a.toUpperCase();
+                        }) : 'Detail',
                     });
                     return breadcrumbArray;
-                }, [])
-                console.log(breadcrumbs);
-                return breadcrumbs;
+                }, []);
             }
         },
     }
