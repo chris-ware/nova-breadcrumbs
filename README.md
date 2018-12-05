@@ -27,7 +27,7 @@ public function tools()
 {
     return [
         // ...
-        \ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs()::make,
+        \ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs::make(),
     ];
 }
 ```
@@ -54,7 +54,7 @@ public function tools()
 {
     return [
         // ...
-        \ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs()::make()->withoutStyles(),
+        \ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs::make()->withoutStyles(),
     ];
 }
 ```

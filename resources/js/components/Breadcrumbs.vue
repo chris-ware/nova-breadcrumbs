@@ -15,6 +15,7 @@
 
 <script>
     export default {
+        props: ['resource'],
         computed: {
             crumbs: function () {
                 let pathArray = this.$router.currentRoute.path.split('/');
