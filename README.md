@@ -27,9 +27,19 @@ public function tools()
 {
     return [
         // ...
-        \ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs()::make,
+        \ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs::make(),
     ];
 }
+```
+
+Finally, add the Breadcrumbs trait to your App\Nova\Resource class.
+
+```php
+use ChrisWare\NovaBreadcrumbs\Traits\Breadcrumbs;
+
+abstract class Resource extends NovaResource
+{
+    use Breadcrumbs;
 ```
 
 ## Customisation
@@ -44,7 +54,7 @@ public function tools()
 {
     return [
         // ...
-        \ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs()::make()->withoutStyles(),
+        \ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs::make()->withoutStyles(),
     ];
 }
 ```
