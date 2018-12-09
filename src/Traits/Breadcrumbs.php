@@ -3,7 +3,6 @@
 namespace ChrisWare\NovaBreadcrumbs\Traits;
 
 use Illuminate\Support\Collection;
-use Laravel\Nova\Fields\ID;
 
 trait Breadcrumbs
 {
