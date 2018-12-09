@@ -1,12 +1,12 @@
 <template>
 
-    <loading-view :loading="loading">
+    <div>
         <div class="mb-3">
             <breadcrumbs/>
         </div>
 
         <dashboard/>
-    </loading-view>
+    </div>
 
 </template>
 
