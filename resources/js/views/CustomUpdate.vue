@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <loading-view :loading="loading">
+
         <div class="mb-3">
             <breadcrumbs :resource="resource"/>
         </div>
@@ -11,7 +12,7 @@
             :viaResourceId="viaResourceId"
             :viaRelationship="viaRelationship"
         />
-    </div>
+    </loading-view>
 </template>
 
 <script>

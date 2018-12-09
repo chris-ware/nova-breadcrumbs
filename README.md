@@ -60,6 +60,15 @@ public function tools()
 ```
 ## Information
 
-This package only works on the index and detail pages currently, as these are the onyl Vue components that have customisable headers. The detail page only shows a link name of Detail, although the intention is to replace this with the Resource name in given time.
+This package works on the following views:
+- Dashboard
+- Index
+- Detail
+- Create
+- Update
+- Attach
+- UpdateAttached
 
-There are 2 new custom Vue components that are introduced for extensibility, for both sets of views. They are custom-{view}-pre-breadcrumbs and custom-{view}-post-breadcrumbs, where view is either index or detail.
+The Index & Detail views make use of of the custom header components that are currently available in the core Laravel Nova views. There are 2 new custom Vue components that are introduced for extensibility, for both sets of views. They are custom-{view}-pre-breadcrumbs and custom-{view}-post-breadcrumbs, where {view} is either index or detail.
+
+The remaining views are hooked via an overwrite to the routes, forcing them to use custom extended views. Once Laravel Nova enable these views to also have custom headers, the package will switch to these instead.

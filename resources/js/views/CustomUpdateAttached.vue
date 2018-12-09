@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <loading-view :loading="loading">
         <div class="mb-3">
             <breadcrumbs :resource="resource" :selectedResource="selectedResource"/>
         </div>
@@ -14,7 +14,7 @@
             :viaRelationship="viaRelationship"
             :polymorphic="polymorphic"
         />
-    </div>
+    </loading-view>
 </template>
 
 <script>
