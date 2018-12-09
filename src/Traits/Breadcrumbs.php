@@ -9,7 +9,8 @@ trait Breadcrumbs
     /**
      * Prepare the resource for JSON serialization using the given fields.
      *
-     * @param  \Illuminate\Support\Collection  $fields
+     * @param  \Illuminate\Support\Collection $fields
+     *
      * @return array
      */
     protected function serializeWithId(Collection $fields)
@@ -20,5 +21,4 @@ trait Breadcrumbs
             'title' => $this->title(),
         ]);
     }
-
 }
