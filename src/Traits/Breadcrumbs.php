@@ -23,11 +23,13 @@ trait Breadcrumbs
         ]);
     }
 
-    protected function breadcrumbResourceLabel() {
+    protected function breadcrumbResourceLabel()
+    {
         return $this->label();
     }
 
-    protected function breadcrumbResourceTitle() {
+    protected function breadcrumbResourceTitle()
+    {
         return $this->title();
     }
 }
