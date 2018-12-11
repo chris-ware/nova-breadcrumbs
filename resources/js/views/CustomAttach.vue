@@ -1,7 +1,8 @@
 <template>
     <loading-view :loading="loading">
         <div class="mb-3">
-            <breadcrumbs :resource="resource" />
+            <breadcrumbs :resource="resource"
+                         :relatedResourceLabel="relatedResourceLabel" />
         </div>
 
         <attach

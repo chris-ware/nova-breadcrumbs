@@ -58,6 +58,9 @@ public function tools()
     ];
 }
 ```
+
+You can also customise both the label and title for a Resource. Label refers to the Resource's Name, so a Users Resource would have a Users label. Title refers to the title of the Resource as set by the $title property on the resource, so by default it would be the resource ID. Both of these can be overwritten for Breadcrumbs only by overwriting the functions on the trait that start with breadcrumb.
+
 ## Information
 
 This package works on the following views:

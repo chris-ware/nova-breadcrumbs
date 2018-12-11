@@ -18,7 +18,16 @@ trait Breadcrumbs
         $parent = parent::serializeWithId($fields);
 
         return array_merge($parent, [
-            'title' => $this->title(),
+            'label' => $this->breadcrumbResourceLabel(),
+            'title' => $this->breadcrumbResourceTitle(),
         ]);
+    }
+
+    protected function breadcrumbResourceLabel() {
+        return $this->label();
+    }
+
+    protected function breadcrumbResourceTitle() {
+        return $this->title();
     }
 }
