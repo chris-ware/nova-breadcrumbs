@@ -3,7 +3,7 @@
         <nav v-if="crumbs.length">
             <ul class="breadcrumbs">
                 <li class="breadcrumbs__item" v-for="crumb in crumbs" v-if="crumb.path != 'resources'">
-                    <router-link :to="crumb.to">{{ crumb.text }}</router-link>
+                    <router-link :to="crumb.to">{{ __(crumb.text) }}</router-link>
                 </li>
             </ul>
         </nav>
@@ -26,7 +26,7 @@
                             : "/" + path,
                         text: isNaN(path) ? (typeof this.relatedResourceLabel !== 'undefined' && this.relatedResourceLabel !== null && idx > 4 ? this.relatedResourceLabel : typeof this.resource !== 'undefined' && this.resource !== null && idx < 4 ? this.resource.label : path.replace('-', ' ').replace(/(?:^|\s)\S/g, function (a) {
                             return a.toUpperCase();
-                        })) : (typeof this.selectedResource !== 'undefined' && this.selectedResource !== null && idx > 3 ? this.selectedResource.display : (typeof this.resource !== 'undefined' && this.resource !== null && path !== '' ? this.resource.title : 'Home')),
+                        })) : (typeof this.selectedResource !== 'undefined' && this.selectedResource !== null && idx > 3 ? this.selectedResource.display : (typeof this.resource !== 'undefined' && this.resource !== null && path !== '' ? this.resource.title : this.__('Home'))),
                     });
 
                     return breadcrumbArray;
