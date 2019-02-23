@@ -1,7 +1,9 @@
 <template>
     <loading-view :loading="loading">
         <div class="mb-3">
-            <breadcrumbs/>
+            <breadcrumbs
+                :singularName="singularName"
+            />
         </div>
 
         <create

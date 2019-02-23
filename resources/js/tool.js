@@ -1,6 +1,7 @@
 import CustomAttach from '@local/views/CustomAttach';
 import CustomCreate from '@local/views/CustomCreate';
 import CustomDashboard from '@local/views/CustomDashboard';
+import CustomIndex from '@local/views/CustomIndex';
 import CustomUpdate from '@local/views/CustomUpdate';
 import CustomUpdateAttached from '@local/views/CustomUpdateAttached';
 
@@ -11,18 +12,16 @@ Nova.booting((Vue, router) => {
     Vue.component('dashboard-view', require('./views/CustomDashboard'));
     Vue.component('edit-attached-view', require('./views/CustomUpdateAttached'));
     Vue.component('edit-view', require('./views/CustomUpdate'));
+    Vue.component('index-view', require('./views/CustomIndex'));
 
     Vue.component('breadcrumbs', require('./components/Breadcrumbs'));
     Vue.component('custom-detail-header', require('./components/CustomDetailHeader'));
     Vue.component('custom-detail-pre-breadcrumb', require('./components/CustomDetailPreBreadcrumbs'));
     Vue.component('custom-detail-post-breadcrumb', require('./components/CustomDetailPostBreadcrumbs'));
-    Vue.component('custom-index-header', require('./components/CustomIndexHeader'));
-    Vue.component('custom-index-pre-breadcrumb', require('./components/CustomIndexPreBreadcrumbs'));
-    Vue.component('custom-index-post-breadcrumb', require('./components/CustomIndexPostBreadcrumbs'));
 
     router.beforeEach(function (to, from, next) {
         var customComponent = null;
-        var globalViews = ['dashboard', 'create', 'edit', 'attach', 'edit-attached'];
+        var globalViews = ['dashboard', 'index', 'create', 'edit', 'attach', 'edit-attached'];
         if (globalViews.includes(to.name)) {
             customComponent = to.name + '-view';
         }
@@ -42,6 +41,12 @@ Nova.booting((Vue, router) => {
             name: 'custom-dashboard',
             path: '/',
             component: CustomDashboard,
+            props: true
+        },
+        {
+            name: 'custom-index',
+            path: '/resources/:resourceName',
+            component: CustomIndex,
             props: true
         },
         {
