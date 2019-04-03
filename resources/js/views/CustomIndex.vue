@@ -8,7 +8,12 @@
         </div>
 
         <index
+            :field="field"
             :resourceName="resourceName"
+            :viaResource="viaResource"
+            :viaResourceId="viaResourceId"
+            :viaRelationship="viaRelationship"
+            :relationshipType="relationshipType"
         />
     </div>
 
