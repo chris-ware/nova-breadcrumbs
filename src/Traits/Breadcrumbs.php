@@ -1,6 +1,6 @@
 <?php
 
-namespace ChrisWare\NovaBreadcrumbs\Traits;
+namespace Morphsites\NovaBreadcrumbs\Traits;
 
 use Illuminate\Support\Collection;
 

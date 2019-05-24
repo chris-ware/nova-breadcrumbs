@@ -1,5 +1,5 @@
 {
-    "name": "chris-ware/nova-breadcrumbs",
+    "name": "morphsites-limited/nova-breadcrumbs",
     "description": "A Laravel Nova tool.",
     "keywords": [
         "laravel",
@@ -12,13 +12,13 @@
     },
     "autoload": {
         "psr-4": {
-            "ChrisWare\\NovaBreadcrumbs\\": "src/"
+            "Morphsites\\NovaBreadcrumbs\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "ChrisWare\\NovaBreadcrumbs\\ToolServiceProvider"
+                "Morphsites\\NovaBreadcrumbs\\ToolServiceProvider"
             ]
         }
     },

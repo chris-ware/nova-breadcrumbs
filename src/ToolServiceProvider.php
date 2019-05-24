@@ -1,6 +1,6 @@
 <?php
 
-namespace ChrisWare\NovaBreadcrumbs;
+namespace Morphsites\NovaBreadcrumbs;
 
 use Illuminate\Support\ServiceProvider;
 
