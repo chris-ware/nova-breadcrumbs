@@ -97,8 +97,14 @@ This package will work with either numeric IDs or UUIDs, whichever is set up as 
 ## Contributing
 In order to contribute, a few steps need to be followed in order to compile the code. Suggested that you put Nova's Vue into dev mode.
 
-* copy the webpack.mix.js.dist file to webpack.mix.js inside your nova directory (probably in vendor/laravel)
-* run npm install & npm dev (or yarn equivalents) in both your nova directory and the breadcrumbs directory
-* You then only need to recompile the breadcrumbs assets via npm run dev (or yarn dev) when building.
-* Ensure that, before commiting, npm prod or yarn prod is run.
+######For development
+```bash
+./build/develop.sh
+```
 
+######For production
+```bash
+./build/production.sh
+```
+
+Please ensure that you commit using production.
