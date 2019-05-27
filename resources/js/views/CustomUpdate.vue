@@ -2,7 +2,7 @@
     <loading-view :loading="loading">
 
         <div class="mb-3">
-            <breadcrumbs :resource="resource"/>
+            <breadcrumbs/>
         </div>
 
         <update
@@ -17,16 +17,9 @@
 
 <script>
     import Update from '@nova/views/Update'
-    import FetchResource from "../mixins/FetchResource";
 
     export default {
         components: {Update},
-        mixins: [Update, FetchResource],
-        data: () => ({
-            resource: null,
-        }),
-        mounted() {
-            this.getResource()
-        },
+        mixins: [Update],
     }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <loading-view :loading="loading">
         <div class="mb-3">
-            <breadcrumbs :resource="resource" :selectedResource="selectedResource"/>
+            <breadcrumbs />
         </div>
 
         <update-attached
@@ -19,17 +19,9 @@
 
 <script>
     import UpdateAttached from '@nova/views/UpdateAttached'
-    import FetchResource from "../mixins/FetchResource";
 
     export default {
         components: {UpdateAttached},
-        mixins: [UpdateAttached, FetchResource],
-        data: () => ({
-            resource: null,
-        }),
-        mounted() {
-            this.initializeComponent()
-            this.getResource()
-        },
+        mixins: [UpdateAttached],
     }
 </script>

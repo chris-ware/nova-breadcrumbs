@@ -1,8 +1,7 @@
 <template>
     <loading-view :loading="loading">
         <div class="mb-3">
-            <breadcrumbs :resource="resource"
-                         :relatedResourceLabel="relatedResourceLabel" />
+            <breadcrumbs />
         </div>
 
         <attach
@@ -19,16 +18,9 @@
 
 <script>
     import Attach from '@nova/views/Attach'
-    import FetchResource from "../mixins/FetchResource";
 
     export default {
         components: {Attach},
-        mixins: [Attach, FetchResource],
-        data: () => ({
-            resource: null,
-        }),
-        mounted() {
-            this.getResource()
-        },
+        mixins: [Attach],
     }
 </script>
