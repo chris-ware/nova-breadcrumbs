@@ -24,11 +24,26 @@ class NovaBreadcrumbsController extends Controller
     }
 
     public function __invoke(Request $request) {
-        $view = Str::after($request->get('view'), 'custom-');
+        $view = str_replace('-',  ' ', Str::after($request->get('view'), 'custom-'));
         $novaHome = Str::finish($request->get('location')['origin'] . Nova::path(), '/');
         $path = Str::after($request->get('location')['href'], $novaHome);
         $pathParts = collect(explode('/', $path))->filter();
         $this->appendToCrumbs(__('Home'), $novaHome);
+
+        if ($request->has('query')) {
+            $query = collect($request->get('query'))->filter();
+
+            if ($query->count() > 1) {
+                $cloneParts = clone $pathParts;
+                $cloneParts->put(1, $query->get('viaResource'));
+                $cloneParts->put(2, $query->get('viaResourceId'));
+                $this->resource = Nova::resourceForKey($query->get('viaResource'));
+                $this->model = $this->findResourceOrFail($query->get('viaResourceId'));
+                $this->appendToCrumbs($this->resource::breadcrumbResourceLabel(), $novaHome . $cloneParts->slice(0, 2)->implode('/'));
+                $this->appendToCrumbs($this->model->breadcrumbResourceTitle(), $novaHome . $cloneParts->slice(0, 3)->implode('/'));
+            }
+
+        }
 
         if ($pathParts->has(1)) {
             $this->resource = Nova::resourceForKey($pathParts->get(1));
@@ -40,7 +55,9 @@ class NovaBreadcrumbsController extends Controller
             $this->appendToCrumbs($this->resource::breadcrumbResourceLabel(), $novaHome . $pathParts->slice(0, 2)->implode('/'));
         }
 
-        if ($pathParts->has(2)) {
+        if ($view == 'create') {
+            $this->appendToCrumbs(__(Str::title($view)), $novaHome . $pathParts->slice(0, 3)->implode('/'));
+        } elseif ($pathParts->has(2)) {
             $this->resource = Nova::resourceForKey($pathParts->get(1));
             $this->model = $this->findResourceOrFail($pathParts->get(2));
 
@@ -48,7 +65,7 @@ class NovaBreadcrumbsController extends Controller
         }
 
         if ($pathParts->has(3)) {
-            $this->appendToCrumbs(__(Str::ucfirst($view)), $novaHome . $pathParts->slice(0, 4)->implode('/'));
+            $this->appendToCrumbs(__(Str::title($view)), $novaHome . $pathParts->slice(0, 4)->implode('/'));
         }
 
         return $this->getCrumbs();
@@ -78,7 +95,7 @@ class NovaBreadcrumbsController extends Controller
      *
      * @return mixed
      */
-    public function resource()
+    public function resource($resource = null)
     {
         return tap($this->resource, function ($resource) {
             abort_if(is_null($resource), 404);
