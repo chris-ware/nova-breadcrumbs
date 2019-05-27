@@ -1,6 +1,7 @@
 import CustomAttach from '@local/views/CustomAttach';
 import CustomCreate from '@local/views/CustomCreate';
 import CustomDashboard from '@local/views/CustomDashboard';
+import CustomLens from '@local/views/CustomLens';
 import CustomUpdate from '@local/views/CustomUpdate';
 import CustomUpdateAttached from '@local/views/CustomUpdateAttached';
 
@@ -11,6 +12,7 @@ Nova.booting((Vue, router) => {
     Vue.component('dashboard-view', require('./views/CustomDashboard'));
     Vue.component('edit-attached-view', require('./views/CustomUpdateAttached'));
     Vue.component('edit-view', require('./views/CustomUpdate'));
+    Vue.component('lens-view', require('./views/CustomLens'));
 
     Vue.component('breadcrumbs', require('./components/Breadcrumbs'));
     Vue.component('custom-detail-header', require('./components/CustomDetailHeader'));
@@ -22,7 +24,7 @@ Nova.booting((Vue, router) => {
 
     router.beforeEach(function (to, from, next) {
         var customComponent = null;
-        var globalViews = ['dashboard', 'create', 'edit', 'attach', 'edit-attached'];
+        var globalViews = ['dashboard', 'create', 'lens', 'edit', 'attach', 'edit-attached'];
         if (globalViews.includes(to.name)) {
             customComponent = to.name + '-view';
         }
@@ -99,7 +101,13 @@ Nova.booting((Vue, router) => {
                     viaRelationship: route.query.viaRelationship
                 };
             }
-        }
+        },
+        {
+            name: 'custom-lens',
+            path: '/resources/:resourceName/lens/:lens',
+            component: CustomLens,
+            props: true,
+        },
     ]);
 
 })

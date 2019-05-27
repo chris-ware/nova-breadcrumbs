@@ -3,7 +3,7 @@
         <nav v-if="this.breadcrumbs != null">
             <ul class="breadcrumbs">
                 <li class="breadcrumbs__item" v-for="breadcrumb in breadcrumbs">
-                    <a v-if="breadcrumb.path != null" :href="breadcrumb.path">{{ __(breadcrumb.title) }}</a>
+                    <router-link v-if="breadcrumb.path != null" :to="breadcrumb.path">{{ __(breadcrumb.title) }}</router-link>
                     <span v-else>{{ __(breadcrumb.title) }}</span>
                 </li>
             </ul>

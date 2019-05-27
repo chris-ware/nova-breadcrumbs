@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Laravel\Nova\Http\Requests\InteractsWithLenses;
 use Laravel\Nova\Http\Requests\InteractsWithResources;
 use Laravel\Nova\Nova;
 
@@ -16,7 +17,7 @@ class NovaBreadcrumbsController extends Controller
     protected $model;
     protected $crumbs;
 
-    use InteractsWithResources;
+    use InteractsWithResources, InteractsWithLenses;
 
     public function __construct()
     {
@@ -28,7 +29,7 @@ class NovaBreadcrumbsController extends Controller
         $novaHome = Str::finish($request->get('location')['origin'] . Nova::path(), '/');
         $path = Str::after($request->get('location')['href'], $novaHome);
         $pathParts = collect(explode('/', $path))->filter();
-        $this->appendToCrumbs(__('Home'), $novaHome);
+        $this->appendToCrumbs(__('Home'), '/');
 
         if ($request->has('query')) {
             $query = collect($request->get('query'))->filter();
@@ -39,8 +40,8 @@ class NovaBreadcrumbsController extends Controller
                 $cloneParts->put(2, $query->get('viaResourceId'));
                 $this->resource = Nova::resourceForKey($query->get('viaResource'));
                 $this->model = $this->findResourceOrFail($query->get('viaResourceId'));
-                $this->appendToCrumbs($this->resource::breadcrumbResourceLabel(), $novaHome . $cloneParts->slice(0, 2)->implode('/'));
-                $this->appendToCrumbs($this->model->breadcrumbResourceTitle(), $novaHome . $cloneParts->slice(0, 3)->implode('/'));
+                $this->appendToCrumbs($this->resource::breadcrumbResourceLabel(), $cloneParts->slice(0, 2)->implode('/'));
+                $this->appendToCrumbs($this->model->breadcrumbResourceTitle(), $cloneParts->slice(0, 3)->implode('/'));
             }
 
         }
@@ -52,20 +53,23 @@ class NovaBreadcrumbsController extends Controller
                 return null;
             }
             
-            $this->appendToCrumbs($this->resource::breadcrumbResourceLabel(), $novaHome . $pathParts->slice(0, 2)->implode('/'));
+            $this->appendToCrumbs($this->resource::breadcrumbResourceLabel(), $pathParts->slice(0, 2)->implode('/'));
         }
 
         if ($view == 'create') {
-            $this->appendToCrumbs(__(Str::title($view)), $novaHome . $pathParts->slice(0, 3)->implode('/'));
+            $this->appendToCrumbs(__(Str::title($view)), $pathParts->slice(0, 3)->implode('/'));
+        } elseif ($view == 'lens') {
+            $lens = Str::title(str_replace('-',  ' ', $pathParts->get(3)));
+            $this->appendToCrumbs($lens, $pathParts->slice(0, 4)->implode('/'));
         } elseif ($pathParts->has(2)) {
             $this->resource = Nova::resourceForKey($pathParts->get(1));
             $this->model = $this->findResourceOrFail($pathParts->get(2));
 
-            $this->appendToCrumbs($this->model->breadcrumbResourceTitle(), $novaHome . $pathParts->slice(0, 3)->implode('/'));
+            $this->appendToCrumbs($this->model->breadcrumbResourceTitle(), $pathParts->slice(0, 3)->implode('/'));
         }
 
-        if ($pathParts->has(3)) {
-            $this->appendToCrumbs(__(Str::title($view)), $novaHome . $pathParts->slice(0, 4)->implode('/'));
+        if ($pathParts->has(3) && $view != 'lens') {
+            $this->appendToCrumbs(__(Str::title($view)), $pathParts->slice(0, 4)->implode('/'));
         }
 
         return $this->getCrumbs();
@@ -74,7 +78,7 @@ class NovaBreadcrumbsController extends Controller
     protected function appendToCrumbs($title, $url = null) {
         $this->crumbs->push([
             'title' => $title,
-            'path' => $url
+            'path' => Str::start($url, '/'),
         ]);
     }
 
@@ -101,4 +105,5 @@ class NovaBreadcrumbsController extends Controller
             abort_if(is_null($resource), 404);
         });
     }
+
 }
