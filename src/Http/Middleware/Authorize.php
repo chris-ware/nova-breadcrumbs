@@ -2,8 +2,8 @@
 
 namespace ChrisWare\NovaBreadcrumbs\Http\Middleware;
 
-use ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs;
 use Laravel\Nova\Nova;
+use ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs;
 
 class Authorize
 {
