@@ -6,10 +6,14 @@ Breadcrumbs for Laravel Nova
 [![License](https://badgen.net/packagist/license/chris-ware/nova-breadcrumbs)](ttps://packagist.org/packages/chris-ware/nova-breadcrumbs)
 [![StyleCI](https://github.styleci.io/repos/160367785/shield?branch=master)](https://github.styleci.io/repos/160367785)
 
+Current Supported Nova Version: **2.0.8**  
+
+As new versions of Nova are released, if changes are made to any of the views that this package has to overwrite, a new version will need to be released. Composer version constraints should prevent installs on versions that aren't supported.
+
 **IMPORTANT**  
 This is a work-in-progress package and is liable to change. Advised not to use in production environments unless you know what you are doing and have complete faith in the code working.
 
- ## Installation
+## Installation
 
 You can install the package in to a Laravel app that uses [Nova](https://nova.laravel.com) via composer:
 
@@ -79,32 +83,4 @@ The remaining views are hooked via an overwrite to the routes, forcing them to u
 This package will work with either numeric IDs or UUIDs, whichever is set up as the ID field for your Models.
 
 ## Screenshots
-#### Dashboard
-![Dashboard View](screenshots/dashboard.png)
-#### Index
-![Index View](screenshots/index.png)
-#### Detail
-![Detail View](screenshots/detail.png)
-#### Create
-![Create View](screenshots/create.png)
-#### Update
-![Update View](screenshots/update.png)
-#### Attach
-![Attach View](screenshots/attach.png)
-#### Update Attached
-![Update Attached View](screenshots/update-attached.png)
-
-## Contributing
-In order to contribute, a few steps need to be followed in order to compile the code. Suggested that you put Nova's Vue into dev mode.
-
-######For development
-```bash
-./build/develop.sh
-```
-
-######For production
-```bash
-./build/production.sh
-```
-
-Please ensure that you commit using production.
+Screenshots can be seen [here](screenshots.md).
