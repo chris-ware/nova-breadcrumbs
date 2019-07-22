@@ -5,10 +5,6 @@
         data: () => ({
             resource: null,
         }),
-        mounted() {
-            this.getResource()
-        },
-
         methods: {
 
             /**
