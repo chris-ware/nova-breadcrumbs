@@ -1,6 +1,5 @@
 <template>
-    <loading-view :loading="loading">
-
+    <div>
         <div class="mb-3">
             <breadcrumbs :resource="resource"/>
         </div>
@@ -12,7 +11,7 @@
             :viaResourceId="viaResourceId"
             :viaRelationship="viaRelationship"
         />
-    </loading-view>
+    </div>
 </template>
 
 <script>
@@ -21,10 +20,19 @@
 
     export default {
         components: {Update},
-        mixins: [Update, FetchResource],
-        data: () => ({
-            resource: null,
-        }),
+        mixins: [FetchResource],
+        props: [
+            'resourceName',
+            'resourceId',
+            'viaResource',
+            'viaResourceId',
+            'viaRelationship',
+        ],
+        data() {
+            return {
+                resource: null,
+            }
+        }, 
         mounted() {
             this.getResource()
         },

@@ -1,10 +1,11 @@
 <template>
-    <loading-view :loading="loading">
+    <div>
         <div class="mb-3">
             <breadcrumbs :resource="resource" :selectedResource="selectedResource"/>
         </div>
 
         <update-attached
+            ref="rview"
             :resourceName="resourceName"
             :resourceId="resourceId"
             :relatedResourceName="relatedResourceName"
@@ -14,7 +15,7 @@
             :viaRelationship="viaRelationship"
             :polymorphic="polymorphic"
         />
-    </loading-view>
+    </div>
 </template>
 
 <script>
@@ -23,13 +24,21 @@
 
     export default {
         components: {UpdateAttached},
-        mixins: [UpdateAttached, FetchResource],
-        data: () => ({
-            resource: null,
-        }),
+        mixins: [FetchResource],
+         data() {
+            return {
+                resource: null,
+                selectedResource: null,
+            }
+        }, 
         mounted() {
-            this.initializeComponent()
             this.getResource()
-        },
+
+            this.$watch(() => this.$refs.rview.selectedResource, (selectedResource) => {
+                if (selectedResource) {
+                    this.selectedResource = selectedResource
+                }
+            })
+        }
     }
 </script>
