@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <div class="mb-3">
             <breadcrumbs
@@ -8,6 +7,7 @@
         </div>
 
         <index
+            ref="rview"
             :field="field"
             :resourceName="resourceName"
             :viaResource="viaResource"
@@ -24,15 +24,25 @@
 
     export default {
         components: {Index},
-        mixins: [Index],
-        computed: {
-            headingTitle() {
-                if (this.resourceResponse == null) {
-                    return null;
+        props: [
+            'field',
+            'resourceName',
+            'viaResource',
+            'viaResourceId',
+            'viaRelationship',
+            'relationshipType',
+        ],
+        data() {
+            return {
+                headingTitle: null,
+            }
+        }, 
+        mounted() {
+            this.$watch(() => this.$refs.rview.resourceResponse, (resourceResponse) => {
+                if (resourceResponse != null) {
+                    this.headingTitle = this.$refs.rview.isRelation && this.$refs.rview.field ? this.$refs.rview.field.name : resourceResponse.label
                 }
-                return this.isRelation && this.field ? this.field.name : this.resourceResponse.label
-            },
+            })
         }
     }
-
 </script>

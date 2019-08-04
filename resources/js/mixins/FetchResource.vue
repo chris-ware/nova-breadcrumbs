@@ -5,12 +5,7 @@
         data: () => ({
             resource: null,
         }),
-        mounted() {
-            this.getResource()
-        },
-
         methods: {
-
             /**
              * Get the resource information.
              */
@@ -21,7 +16,6 @@
                     Nova.request().get('/nova-api/' + this.resourceName + '/' + this.resourceId)
                 )
                     .then(({data: {panels, resource}}) => {
-                        this.panels = panels
                         this.resource = resource
                         this.loading = false
                     })
