@@ -84,3 +84,7 @@ This package will work with either numeric IDs or UUIDs, whichever is set up as 
 
 ## Screenshots
 Screenshots can be seen [here](screenshots.md).
+
+## Contributors
+
+@gaabora - Solved the duplicating API calls issue. Major thanks.
