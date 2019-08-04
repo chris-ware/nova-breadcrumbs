@@ -25,12 +25,22 @@
     export default {
         components: {UpdateAttached},
         mixins: [FetchResource],
-         data() {
+        data() {
             return {
                 resource: null,
                 selectedResource: null,
             }
-        }, 
+        },
+        props: [
+            'resourceName',
+            'resourceId',
+            'relatedResourceName',
+            'relatedResourceId',
+            'viaResource',
+            'viaResourceId',
+            'viaRelationship',
+            'polymorphic',
+        ],
         mounted() {
             this.getResource()
 
