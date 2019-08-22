@@ -6,7 +6,7 @@ Breadcrumbs for Laravel Nova
 [![License](https://badgen.net/packagist/license/chris-ware/nova-breadcrumbs)](ttps://packagist.org/packages/chris-ware/nova-breadcrumbs)
 [![StyleCI](https://github.styleci.io/repos/160367785/shield?branch=master)](https://github.styleci.io/repos/160367785)
 
-Current Supported Nova Version: **2.0.11**  
+Current Supported Nova Version: **2.1.0**  
 
 As new versions of Nova are released, if changes are made to any of the views that this package has to overwrite, a new version will need to be released. Composer version constraints should prevent installs on versions that aren't supported.
 
