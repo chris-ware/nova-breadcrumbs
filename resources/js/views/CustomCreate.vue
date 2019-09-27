@@ -35,7 +35,7 @@
         mounted() {
             this.$watch(() => this.$refs.rview.loading, (loading) => {
                 if (!loading) {
-                    this.singularName = (this.$refs.rview.relationResponse)
+                    this.singularName = (!this.$refs.rview.resourceInformation.singularLabel && this.$refs.rview.relationResponse)
                         ? this.$refs.rview.relationResponse.singularLabel
                         : this.$refs.rview.resourceInformation.singularLabel
                 }
