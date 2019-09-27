@@ -8,7 +8,7 @@
     "license": "MIT",
     "require": {
         "php": ">=7.1.0",
-        "laravel/nova": ">=2.0.0 <=2.3.0"
+        "laravel/nova": ">=2.0.0 <=2.3.1"
     },
     "autoload": {
         "psr-4": {
