@@ -2,7 +2,9 @@
 
     <div>
         <div class="mb-3">
-            <breadcrumbs/>
+            <breadcrumbs
+                :rview="'dashboard'"
+            />
         </div>
 
         <dashboard/>

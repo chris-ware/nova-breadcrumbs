@@ -1,27 +1,31 @@
-import CustomAttach from '@local/views/CustomAttach';
 import CustomCreate from '@local/views/CustomCreate';
 import CustomDashboard from '@local/views/CustomDashboard';
-import CustomIndex from '@local/views/CustomIndex';
-import CustomUpdate from '@local/views/CustomUpdate';
-import CustomUpdateAttached from '@local/views/CustomUpdateAttached';
 
 Nova.booting((Vue, router) => {
 
-    Vue.component('attach-view', require('./views/CustomAttach'));
     Vue.component('create-view', require('./views/CustomCreate'));
-    Vue.component('dashboard-view', require('./views/CustomDashboard'));
-    Vue.component('edit-attached-view', require('./views/CustomUpdateAttached'));
-    Vue.component('edit-view', require('./views/CustomUpdate'));
-    Vue.component('index-view', require('./views/CustomIndex'));
+    Vue.component('dashboard.custom-view', require('./views/CustomDashboard'));
 
     Vue.component('breadcrumbs', require('./components/Breadcrumbs'));
+    Vue.component('custom-attach-header', require('./components/CustomAttachHeader'));
+    Vue.component('custom-attach-pre-breadcrumb', require('./components/CustomAttachPreBreadcrumbs'));
+    Vue.component('custom-attach-post-breadcrumb', require('./components/CustomAttachPostBreadcrumbs'));
     Vue.component('custom-detail-header', require('./components/CustomDetailHeader'));
     Vue.component('custom-detail-pre-breadcrumb', require('./components/CustomDetailPreBreadcrumbs'));
     Vue.component('custom-detail-post-breadcrumb', require('./components/CustomDetailPostBreadcrumbs'));
+    Vue.component('custom-index-header', require('./components/CustomIndexHeader'));
+    Vue.component('custom-index-pre-breadcrumb', require('./components/CustomIndexPreBreadcrumbs'));
+    Vue.component('custom-index-post-breadcrumb', require('./components/CustomIndexPostBreadcrumbs'));
+    Vue.component('custom-update-header', require('./components/CustomUpdateHeader'));
+    Vue.component('custom-update-pre-breadcrumb', require('./components/CustomUpdatePreBreadcrumbs'));
+    Vue.component('custom-update-post-breadcrumb', require('./components/CustomUpdatePostBreadcrumbs'));
+    Vue.component('custom-update-attached-header', require('./components/CustomUpdateAttachedHeader'));
+    Vue.component('custom-update-attached-pre-breadcrumb', require('./components/CustomUpdateAttachedPreBreadcrumbs'));
+    Vue.component('custom-update-attached-post-breadcrumb', require('./components/CustomUpdateAttachedPostBreadcrumbs'));
 
     router.beforeEach(function (to, from, next) {
         var customComponent = null;
-        var globalViews = ['dashboard', 'index', 'create', 'edit', 'attach', 'edit-attached'];
+        var globalViews = ['create', 'dashboard.custom'];
         if (globalViews.includes(to.name)) {
             customComponent = to.name + '-view';
         }
@@ -38,18 +42,6 @@ Nova.booting((Vue, router) => {
 
     router.addRoutes([
         {
-            name: 'custom-dashboard',
-            path: '/',
-            component: CustomDashboard,
-            props: true
-        },
-        {
-            name: 'custom-index',
-            path: '/resources/:resourceName',
-            component: CustomIndex,
-            props: true
-        },
-        {
             name: 'custom-create',
             path: '/resources/:resourceName/new',
             component: CustomCreate,
@@ -63,48 +55,11 @@ Nova.booting((Vue, router) => {
             },
         },
         {
-            name: 'custom-edit',
-            path: '/resources/:resourceName/:resourceId/edit',
-            component: CustomUpdate,
-            props: function props(route) {
-                return {
-                    component: route.params.component,
-                    resourceName: route.params.resourceName,
-                    resourceId: route.params.resourceId,
-                    viaResource: route.query.viaResource,
-                    viaResourceId: route.query.viaResourceId,
-                    viaRelationship: route.query.viaRelationship
-                };
-            }
-        }, {
-            name: 'custom-attach',
-            path: '/resources/:resourceName/:resourceId/attach/:relatedResourceName',
-            component: CustomAttach,
-            props: function props(route) {
-                return {
-                    component: route.params.component,
-                    resourceName: route.params.resourceName,
-                    resourceId: route.params.resourceId,
-                    relatedResourceName: route.params.relatedResourceName,
-                    viaRelationship: route.query.viaRelationship,
-                    polymorphic: route.query.polymorphic == '1'
-                };
-            }
-        }, {
-            name: 'custom-edit-attached',
-            path: '/resources/:resourceName/:resourceId/edit-attached/:relatedResourceName/:relatedResourceId',
-            component: CustomUpdateAttached,
-            props: function props(route) {
-                return {
-                    component: route.params.component,
-                    resourceName: route.params.resourceName,
-                    resourceId: route.params.resourceId,
-                    relatedResourceName: route.params.relatedResourceName,
-                    relatedResourceId: route.params.relatedResourceId,
-                    viaRelationship: route.query.viaRelationship
-                };
-            }
-        }
+            name: 'custom-dashboard.custom',
+            path: '/dashboards/:name',
+            component: CustomDashboard,
+            props: true,
+        },
     ]);
 
 })
