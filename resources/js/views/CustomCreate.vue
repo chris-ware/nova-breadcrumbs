@@ -3,6 +3,7 @@
         <div class="mb-3">
             <breadcrumbs
                 :singularName="singularName"
+                :rview="'create'"
             />
         </div>
 
@@ -31,7 +32,7 @@
             return {
                 singularName: null,
             }
-        }, 
+        },
         mounted() {
             this.$watch(() => this.$refs.rview.$children[0].loading, (loading) => {
                 if (!loading) {

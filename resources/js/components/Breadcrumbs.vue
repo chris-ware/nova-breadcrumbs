@@ -3,7 +3,7 @@
         <nav v-if="crumbs.length">
             <ul class="breadcrumbs">
                 <li class="breadcrumbs__item" v-for="crumb in crumbs" v-if="crumb.text != false">
-                    <router-link :to="crumb.to">{{ __(crumb.text) }}</router-link>
+                    <router-link :to="crumb.to" v-html="__(crumb.text)"></router-link>
                 </li>
             </ul>
         </nav>
@@ -13,61 +13,132 @@
 <script>
     export default {
         props: [
-            'headingTitle',
-            'relatedResourceLabel',
             'resource',
-            'resourceName',
-            'selectedResource',
-            'singularName',
+            'resourceId',
+            'rview',
         ],
         computed: {
             crumbs: function () {
-                let pathArray = this.$router.currentRoute.path.split('/').filter(function(e){return e});
-                pathArray.unshift('');
+                let pathArray = this.$router.currentRoute.path.split('/').filter((e) => e);
+                let view = this.$parent;
+                if (this.rview == null) {
+                    view = this.$parent.$parent.$parent;
+                }
+                if (pathArray[0] != 'dashboards') {
+                    pathArray.unshift('');
+                }
 
+                let crumb = null;
                 return pathArray.reduce((breadcrumbArray, path, idx) => {
-                    breadcrumbArray.push({
+                    crumb = {
                         path: path,
-                        to: (breadcrumbArray[idx - 1] ? (breadcrumbArray[idx - 1].to === '/' ? '' : breadcrumbArray[idx - 1].to) :'') + "/" + path,
-                        text: this.breadcrumbLabel(path, idx),
-                    });
-
+                        to: this.breadcrumbLink(breadcrumbArray, path, idx),
+                        text: this.breadcrumbLabel(path, idx, view, crumb),
+                    };
+                    breadcrumbArray.push(crumb);
                     return breadcrumbArray;
                 }, []);
             }
         },
-        methods : {
-            breadcrumbLabel(path, idx) {
-                if (['resources', 'attach', 'edit-attached'].includes(path) || idx == 5) {
-                    return false;
-                } else if (path == '') {
+        methods: {
+            breadcrumbLink(breadcrumbArray, path, idx) {
+                return (breadcrumbArray[idx - 1] ? (breadcrumbArray[idx - 1].to === '/' ? '' : breadcrumbArray[idx - 1].to) : '') + "/" + path
+            },
+            breadcrumbLabel(path, idx, view, prev) {
+                if (prev != null
+                    && prev.path == 'dashboards'
+                    && view.$attrs.name == 'main') {
                     return this.__('Home');
-                } else if (typeof this.resource !== 'undefined' && this.resource !== null) {
-                    if (path == this.resource.id.value) {
-                        return this.resource.title;
-                    } else if (typeof this.selectedResource !== 'undefined' && this.selectedResource !== null && path == this.selectedResource.value) {
-                        return this.selectedResource.display;
-                    } else if (idx < 4) {
-                        return this.resource.label;
-                    } else if (idx >= 4) {
-                        return path.replace('-', ' ').replace(/(?:^|\s)\S/g, function (a) {
-                            return a.toUpperCase();
-                        });
-                    }
+                }
 
-                } else if (typeof this.relatedResourceLabel !== 'undefined' && this.relatedResourceLabel !== null) {
-                    return this.relatedResourceLabel;
-                } else if (typeof this.headingTitle !== 'undefined' && this.headingTitle !== null) {
-                        return this.headingTitle;
+                if (prev != null
+                    && prev.path == 'dashboards') {
+                    return view.$attrs.name.replace('-', ' ').replace(/(?:^|\s)\S/g, function (a) {
+                        return a.toUpperCase();
+                    });
                 }
-                else if (typeof this.singularName !== 'undefined' && this.singularName !== null) {
-                    if (idx >= 3) {
-                        return path.replace('-', ' ').replace(/(?:^|\s)\S/g, function (a) {
-                            return a.toUpperCase();
-                        });
-                    }
-                    return this.singularName;
+
+                if (idx == 5
+                    && prev.path == 'attach') {
+                    return view.headingTitle;
                 }
+
+                if (['resources', 'attach', 'edit-attached', 'dashboards'].includes(path) || idx == 5) {
+                    return false;
+                }
+
+                if (path == '') {
+                    return this.__('Home');
+                }
+
+                if (path == 'new') {
+                    return this.__('Create');
+                }
+
+                if (idx == 2
+                    && typeof view.singularName !== 'undefined'
+                    && view.singularName !== null) {
+                    return view.singularName;
+                }
+
+                if (typeof view.resource !== 'undefined'
+                    && view.resource !== null
+                    && path == view.resource.id.value) {
+                    return view.resource.title;
+                }
+
+
+                if (typeof view.resource !== 'undefined'
+                    && view.resource !== null
+                    && typeof view.selectedResource !== 'undefined'
+                    && view.selectedResource !== null
+                    && path == view.selectedResource.value) {
+                    return view.selectedResource.display;
+                }
+
+                if (typeof view.resource !== 'undefined'
+                    && view.resource !== null
+                    && idx < 4) {
+                    return view.resource.label;
+                }
+
+                if (typeof view.resource !== 'undefined'
+                    && view.resource !== null
+                    && idx >= 4) {
+                    return path.replace('-', ' ').replace(/(?:^|\s)\S/g, function (a) {
+                        return a.toUpperCase();
+                    });
+                }
+
+                if (typeof view.relatedResourceLabel !== 'undefined'
+                    && view.relatedResourceLabel !== null
+                    && idx > 4) {
+                    return this.__('Edit Attached') + ' ' + view.relatedResourceLabel;
+                }
+
+                if (typeof view.relatedResourceLabel !== 'undefined'
+                    && view.relatedResourceLabel !== null
+                    && idx <= 4) {
+                    return path.replace('-', ' ').replace(/(?:^|\s)\S/g, function (a) {
+                        return a.toUpperCase();
+                    });
+                }
+
+                if (typeof view.headingTitle !== 'undefined'
+                    && view.headingTitle !== null) {
+                    return view.headingTitle;
+                }
+
+                if (typeof view.singularName !== 'undefined'
+                    && view.singularName !== null
+                    && idx >= 3) {
+                    return path.replace('-', ' ').replace(/(?:^|\s)\S/g, function (a) {
+                        return a.toUpperCase();
+                    });
+                }
+
+
+
                 return '...';
 
             }
