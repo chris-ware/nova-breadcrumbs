@@ -33,7 +33,8 @@ trait Breadcrumbs
     {
         return $this->title();
     }
-    protected function breadcrumbParents(){
+    protected function breadcrumbParents()
+    {
         return null; // no parents at all
     }
 }
