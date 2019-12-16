@@ -20,6 +20,7 @@ trait Breadcrumbs
         return array_merge($parent, [
             'label' => $this->breadcrumbResourceLabel(),
             'title' => $this->breadcrumbResourceTitle(),
+            'bcParents' => $this->breadcrumbParents(),
         ]);
     }
 
@@ -31,5 +32,8 @@ trait Breadcrumbs
     protected function breadcrumbResourceTitle()
     {
         return $this->title();
+    }
+    protected function breadcrumbParents(){
+        return null; // no parents at all
     }
 }

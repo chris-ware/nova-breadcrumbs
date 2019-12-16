@@ -25,7 +25,8 @@
                 let pathArray = this.$router.currentRoute.path.split('/').filter(function(e){return e});
                 pathArray.unshift('');
 
-                return pathArray.reduce((breadcrumbArray, path, idx) => {
+
+                const res = pathArray.reduce((breadcrumbArray, path, idx) => {
                     breadcrumbArray.push({
                         path: path,
                         to: (breadcrumbArray[idx - 1] ? (breadcrumbArray[idx - 1].to === '/' ? '' : breadcrumbArray[idx - 1].to) :'') + "/" + path,
@@ -34,6 +35,15 @@
 
                     return breadcrumbArray;
                 }, []);
+                if (this.resource.bcParents){
+                    res.splice(1, 2);
+                    const parents = this.resource.bcParents;
+                    Object.keys(parents).reverse().forEach(function(to) {
+                        res.splice(1, 0, {to: to, text: parents[to]})
+                    });
+
+                }
+                return res;
             }
         },
         methods : {
