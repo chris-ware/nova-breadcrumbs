@@ -35,7 +35,7 @@
 
                     return breadcrumbArray;
                 }, []);
-                if (this.resource.bcParents){
+                if (this.resource && this.resource.bcParents){
                     res.splice(1, 2);
                     const parents = this.resource.bcParents;
                     Object.keys(parents).reverse().forEach(function(to) {

@@ -8,10 +8,10 @@ import CustomUpdateAttached from '@local/views/CustomUpdateAttached';
 Nova.booting((Vue, router) => {
 
     Vue.component('attach-view', require('./views/CustomAttach'));
-    Vue.component('create-view', require('./views/CustomCreate'));
+    // Vue.component('create-view', require('./views/CustomCreate'));
     Vue.component('dashboard-view', require('./views/CustomDashboard'));
-    Vue.component('edit-attached-view', require('./views/CustomUpdateAttached'));
-    Vue.component('edit-view', require('./views/CustomUpdate'));
+    // Vue.component('edit-attached-view', require('./views/CustomUpdateAttached'));
+    // Vue.component('edit-view', require('./views/CustomUpdate'));
     Vue.component('index-view', require('./views/CustomIndex'));
 
     Vue.component('breadcrumbs', require('./components/Breadcrumbs'));
@@ -56,9 +56,9 @@ Nova.booting((Vue, router) => {
             props: route => {
                 return {
                     resourceName: route.params.resourceName,
-                    viaResource: route.query.viaResource,
-                    viaResourceId: route.query.viaResourceId,
-                    viaRelationship: route.query.viaRelationship,
+                    viaResource: route.query.viaResource || '',
+                    viaResourceId: route.query.viaResourceId || '',
+                    viaRelationship: route.query.viaRelationship || '',
                 }
             },
         },
@@ -71,9 +71,9 @@ Nova.booting((Vue, router) => {
                     component: route.params.component,
                     resourceName: route.params.resourceName,
                     resourceId: route.params.resourceId,
-                    viaResource: route.query.viaResource,
-                    viaResourceId: route.query.viaResourceId,
-                    viaRelationship: route.query.viaRelationship
+                    viaResource: route.query.viaResource || '',
+                    viaResourceId: route.query.viaResourceId || '',
+                    viaRelationship: route.query.viaRelationship || '',
                 };
             }
         }, {
@@ -87,7 +87,7 @@ Nova.booting((Vue, router) => {
                     resourceId: route.params.resourceId,
                     relatedResourceName: route.params.relatedResourceName,
                     viaRelationship: route.query.viaRelationship,
-                    polymorphic: route.query.polymorphic == '1'
+                    polymorphic: route.query.polymorphic == '1',
                 };
             }
         }, {
@@ -101,7 +101,7 @@ Nova.booting((Vue, router) => {
                     resourceId: route.params.resourceId,
                     relatedResourceName: route.params.relatedResourceName,
                     relatedResourceId: route.params.relatedResourceId,
-                    viaRelationship: route.query.viaRelationship
+                    viaRelationship: route.query.viaRelationship,
                 };
             }
         }

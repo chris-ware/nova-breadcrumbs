@@ -33,11 +33,11 @@
             }
         }, 
         mounted() {
-            this.$watch(() => this.$refs.rview.loading, (loading) => {
+            this.$watch(() => this.$refs.rview.$children[0].loading, (loading) => {
                 if (!loading) {
-                    this.singularName = (!this.$refs.rview.resourceInformation.singularLabel && this.$refs.rview.relationResponse)
-                        ? this.$refs.rview.relationResponse.singularLabel
-                        : this.$refs.rview.resourceInformation.singularLabel
+                    // this.singularName = (!this.$refs.rview.$children[0].resourceInformation.singularLabel && this.$refs.rview.$children[0].relationResponse)
+                    //     ? this.$refs.rview.$children[0].relationResponse.singularLabel
+                    //     : this.$refs.rview.$children[0].resourceInformation.singularLabel
                 }
             })
         }
