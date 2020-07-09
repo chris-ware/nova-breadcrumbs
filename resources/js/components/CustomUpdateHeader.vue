@@ -1,19 +1,16 @@
 <template>
     <div>
         <custom-update-pre-breadcrumb
-            :resource="resource"
             :resource-id="resourceId"
             :resource-name="resourceName"
         />
 
         <breadcrumbs
-            :resource="resource"
             :resource-id="resourceId"
             :resource-name="resourceName"
         />
 
         <custom-update-post-breadcrumb
-            :resource="resource"
             :resource-id="resourceId"
             :resource-name="resourceName"
         />
@@ -24,6 +21,6 @@
 <script>
 
     export default {
-        props: ['resource', 'resourceName', 'resourceId'],
+        props: ['resourceName', 'resourceId'],
     }
 </script>

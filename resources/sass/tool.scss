@@ -1,25 +1,28 @@
 // Nova Tool CSS
 
 .breadcrumbs {
-    padding-left: 0;
-    padding-bottom: 12px;
+    padding: 12px;
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 20px;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    border-bottom: 1px solid var(--white-50);
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid var(--white-50);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .05);
 
     .breadcrumbs__item {
         display: inline-block;
         position: relative;
 
-        a {
+        a,
+        span {
             margin-right: 12px;
             margin-left: 8px;
             color: var(--primary);
             text-decoration: none;
-            font-weight: normal !important;
+            font-weight: 600 !important;
 
             &:after {
                 content: "/";
@@ -40,16 +43,12 @@
         }
 
         &:last-of-type,
-        .router-link-exact-active {
-
-            a {
-                color: var(--black);
-                cursor: default;
-                &:after {
-                    content: '';
-                }
+        span {
+            color: var(--black);
+            cursor: default;
+            &:after {
+                content: '';
             }
-
         }
     }
 }

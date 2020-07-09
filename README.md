@@ -6,13 +6,6 @@ Breadcrumbs for Laravel Nova
 [![License](https://badgen.net/packagist/license/chris-ware/nova-breadcrumbs)](ttps://packagist.org/packages/chris-ware/nova-breadcrumbs)
 [![StyleCI](https://github.styleci.io/repos/160367785/shield?branch=master)](https://github.styleci.io/repos/160367785)
 
-Current Supported Nova Version: **3.8**  
-
-As new versions of Nova are released, if changes are made to any of the views that this package has to overwrite, a new version will need to be released. Composer version constraints should prevent installs on versions that aren't supported.
-
-**IMPORTANT**  
-This is a work-in-progress package and is liable to change. Advised not to use in production environments unless you know what you are doing and have complete faith in the code working.
-
 ## Installation
 
 You can install the package in to a Laravel app that uses [Nova](https://nova.laravel.com) via composer:
@@ -65,26 +58,11 @@ public function tools()
 
 You can also customise both the label and title for a Resource. Label refers to the Resource's Name, so a Users Resource would have a Users label. Title refers to the title of the Resource as set by the $title property on the resource, so by default it would be the resource ID. Both of these can be overwritten for Breadcrumbs only by overwriting the functions on the trait that start with breadcrumb.
 
+You can also conditionally disable breadcrumbs, using the static breadcrumbs method presented in the trait.
+
 ## Information
 
-This package works on the following views:
-- Dashboard
-- Index
-- Detail
-- Create
-- Update
-- Attach
-- UpdateAttached
-
-The Detail view makes use of of the custom header components that are currently available in the core Laravel Nova views. There are 2 new custom Vue components that are introduced for extensibility, for this view. They are custom-detail-pre-breadcrumbs and custom-detail-post-breadcrumbs.
-
-The remaining views are hooked via an overwrite to the routes, forcing them to use custom extended views.
-
-This package will work with either numeric IDs or UUIDs, whichever is set up as the ID field for your Models.
+This package works using the custom header elements available on all Nova views. Due to the fact that the data available to these views differ, the rendering of breadcrumbs is API powered, to ensure that for all views, the necessary data is available and displayed. 
 
 ## Screenshots
 Screenshots can be seen [here](screenshots.md).
-
-## Contributors
-
-@gaabora - Solved the duplicating API calls issue. Major thanks.
