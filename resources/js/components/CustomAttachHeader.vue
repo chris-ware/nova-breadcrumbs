@@ -1,19 +1,16 @@
 <template>
     <div>
-        <custom-detail-pre-breadcrumb
-            :resource="resource"
+        <custom-attach-pre-breadcrumb
             :resource-id="resourceId"
             :resource-name="resourceName"
         />
 
         <breadcrumbs
-            :resource="resource"
             :resource-id="resourceId"
             :resource-name="resourceName"
         />
 
-        <custom-detail-post-breadcrumb
-            :resource="resource"
+        <custom-attach-post-breadcrumb
             :resource-id="resourceId"
             :resource-name="resourceName"
         />

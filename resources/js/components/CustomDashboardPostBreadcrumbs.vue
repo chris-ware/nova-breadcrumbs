@@ -4,6 +4,6 @@
 
 <script>
     export default {
-        props: ['resource', 'resourceName', 'resourceId'],
+        props: ['dashboardName'],
     };
 </script>

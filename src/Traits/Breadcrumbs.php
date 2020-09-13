@@ -23,12 +23,17 @@ trait Breadcrumbs
         ]);
     }
 
-    protected function breadcrumbResourceLabel()
+    public static function breadcrumbs()
     {
-        return $this->label();
+        return true;
     }
 
-    protected function breadcrumbResourceTitle()
+    public static function breadcrumbResourceLabel()
+    {
+        return self::label();
+    }
+
+    public function breadcrumbResourceTitle()
     {
         return $this->title();
     }

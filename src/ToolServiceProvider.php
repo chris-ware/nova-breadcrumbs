@@ -2,6 +2,8 @@
 
 namespace ChrisWare\NovaBreadcrumbs;
 
+use ChrisWare\NovaBreadcrumbs\Http\Middleware\Authorize;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class ToolServiceProvider extends ServiceProvider
@@ -13,7 +15,9 @@ class ToolServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->booted(function () {
+            $this->routes();
+        });
     }
 
     /**
@@ -23,7 +27,13 @@ class ToolServiceProvider extends ServiceProvider
      */
     protected function routes()
     {
-        //
+        if ($this->app->routesAreCached()) {
+            return;
+        }
+
+        Route::middleware(['nova', Authorize::class])
+            ->prefix('nova-vendor/chris-ware/nova-breadcrumbs')
+            ->group(__DIR__ . '/../routes/api.php');
     }
 
     /**
