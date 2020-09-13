@@ -1,8 +1,8 @@
 <template>
     <div>
-        <custom-dashboard-pre-breadcrumb :dashboard-name="dashboardName" />
+        <custom-dashboard-pre-breadcrumb :dashboard-name="dashboardName"/>
 
-        <breadcrumbs :dashboard-name="dashboardName" />
+        <breadcrumbs :dashboard-name="dashboardName"/>
 
         <custom-dashboard-post-breadcrumb :dashboard-name="dashboardName"/>
 
@@ -10,8 +10,7 @@
 </template>
 
 <script>
-
     export default {
         props: ['dashboardName'],
-    }
+    };
 </script>
