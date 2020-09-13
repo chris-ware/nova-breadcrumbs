@@ -21,7 +21,7 @@ export default {
     },
     methods: {
         fetchBreadcrumbs() {
-            Nova.request().post('/nova-vendor/chris-ware/nova-breadcrumbs/', {
+            Nova.request().post('/nova-vendor/chris-ware/nova-breadcrumbs', {
                 location: window.location,
                 query: this.$route.query,
                 view: this.$route.name,
