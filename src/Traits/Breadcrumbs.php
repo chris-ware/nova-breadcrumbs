@@ -30,7 +30,7 @@ trait Breadcrumbs
 
     public static function breadcrumbResourceLabel()
     {
-        return self::label();
+        return static::label();
     }
 
     public function breadcrumbResourceTitle()
