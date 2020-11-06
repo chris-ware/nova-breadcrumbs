@@ -28,7 +28,16 @@ class NovaBreadcrumbsController extends Controller
         $view = str_replace('-', ' ', Str::after($request->get('view'), 'custom-'));
         $novaHome = Str::finish($request->get('location')['origin'] . Nova::path(), '/');
         $path = Str::after($request->get('location')['href'], $novaHome);
-        $pathParts = collect(explode('/', $path))->filter();
+        $pathParts = collect(explode('/', $path))->filter()->map(function ($part, $key) {
+            $itemParts = collect(explode('?', $part));
+
+            if ($itemParts->count() === 1) {
+                return $part;
+            }
+
+            return $itemParts->get(0);
+        });
+
         $this->appendToCrumbs(__('Home'), '/');
 
         if ($request->has('query')) {
