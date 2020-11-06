@@ -68,7 +68,10 @@ class NovaBreadcrumbsController extends Controller
             $this->appendToCrumbs($lens, $pathParts->slice(0, 4)->implode('/'));
         } elseif ($pathParts->has(2)) {
             $this->resource = Nova::resourceForKey($pathParts->get(1));
-            $this->model = $this->findResourceOrFail($pathParts->get(2));
+
+            // we might have query params like '1003?tab=Company', so we clean it up.
+            $resourceId = Str::before($pathParts->get(2), '?');
+            $this->model = $this->findResourceOrFail($resourceId);
 
             $this->appendToCrumbs($this->model->breadcrumbResourceTitle(), $pathParts->slice(0, 3)->implode('/'));
         }
