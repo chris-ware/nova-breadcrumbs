@@ -1,6 +1,6 @@
 <template>
     <nav v-if="this.breadcrumbs != null">
-        <ul v-if="breadcrumbs" class="breadcrumbs">
+        <ul class="breadcrumbs">
             <li v-for="breadcrumb in breadcrumbs" class="breadcrumbs__item">
                 <router-link v-if="breadcrumb.path != null" :to="breadcrumb.path">
                     {{ __(breadcrumb.title) }}
