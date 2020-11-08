@@ -53,10 +53,16 @@ class NovaBreadcrumbsController extends Controller
                 return null;
             }
 
-            $method_exists = method_exists($this->resource, 'breadcrumbs');
-            if( $this->resource && ( !$method_exists || !$this->resource::breadcrumbs() ) )
+            if( $this->resource )
             {
-                return null;
+                $method_exists = method_exists($this->resource, 'breadcrumbs');
+                if( !$method_exists) {
+                    return true;
+                }
+                if( !$this->resource::breadcrumbs() )
+                {
+                    return null;
+                }
             }
         }
 
