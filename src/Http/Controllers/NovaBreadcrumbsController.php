@@ -136,6 +136,7 @@ class NovaBreadcrumbsController extends Controller
         if ($resource && $resource::breadcrumbs() == false) {
             return null;
         }
+
         return $resource;
     }
 }
