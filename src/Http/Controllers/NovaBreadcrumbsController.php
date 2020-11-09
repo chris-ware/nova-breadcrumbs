@@ -49,7 +49,7 @@ class NovaBreadcrumbsController extends Controller
         if ($pathParts->has(1)) {
             $this->resource = Nova::resourceForKey($pathParts->get(1));
 
-            if ($this->resource && (! $this->resource::breadcrumbs() || ! method_exists($this->resource, 'breadcrumbs') )) {
+            if ($this->resource && (! $this->resource::breadcrumbs() || ! method_exists($this->resource, 'breadcrumbs'))) {
                 return null;
             }
 
