@@ -2,6 +2,7 @@
 
 namespace ChrisWare\NovaBreadcrumbs\Http\Controllers;
 
+use ChrisWare\NovaBreadcrumbs\Traits\Breadcrumbs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
@@ -46,17 +47,27 @@ class NovaBreadcrumbsController extends Controller
             }
         }
 
-        if ($pathParts->has(1)) {
-            $this->resource = Nova::resourceForKey($pathParts->get(1));
+        if ($pathParts->has(1) == false) {
+            return null;
+        }
 
-            if ($this->resource && ! $this->resource::breadcrumbs()) {
-                return null;
-            }
+        $this->resource = Nova::resourceForKey($pathParts->get(1));
 
-            if ($this->resource) {
-                $this->appendToCrumbs($this->resource::breadcrumbResourceLabel(),
-                    $pathParts->slice(0, 2)->implode('/'));
-            }
+        if ($this->resource && in_array(Breadcrumbs::class, class_uses_recursive($this->resource)) == false) {
+            return null;
+        }
+
+        if ($this->resource && method_exists($this->resource, 'breadcrumbs') == false) {
+            return null;
+        }
+
+        if ($this->resource && $this->resource::breadcrumbs() == false) {
+            return null;
+        }
+
+        if ($this->resource) {
+            $this->appendToCrumbs($this->resource::breadcrumbResourceLabel(),
+                $pathParts->slice(0, 2)->implode('/'));
         }
 
         if ($view == 'create') {
