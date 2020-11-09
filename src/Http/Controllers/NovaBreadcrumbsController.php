@@ -38,11 +38,16 @@ class NovaBreadcrumbsController extends Controller
 
         if ($request->has('query') && ($query = collect($request->get('query'))->filter()) && $query->count() > 1) {
             $cloneParts = clone $pathParts;
-            $cloneParts->put(1, $query->get('viaResource'));
-            $cloneParts->put(2, $query->get('viaResourceId'));
-            $this->resource = $this->resourceFromKey($query->get('viaResource'));
 
-            if ($this->resource) {
+            if ($query->has('viaResource')) {
+                $cloneParts->put(1, $query->get('viaResource'));
+            }
+            if ($query->has('viaResourceId')) {
+                $cloneParts->put(2, $query->get('viaResourceId'));
+                $this->resource = $this->resourceFromKey($query->get('viaResource'));
+            }
+
+            if (empty($this->resource) == false) {
                 $this->model = $this->findResourceOrFail($query->get('viaResourceId'));
                 $this->appendToCrumbs($this->resource::breadcrumbResourceLabel(),
                     $cloneParts->slice(0, 2)->implode('/'));
