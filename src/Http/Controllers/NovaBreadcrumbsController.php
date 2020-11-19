@@ -74,7 +74,7 @@ class NovaBreadcrumbsController extends Controller
         } elseif ($view == 'lens') {
             $lens = Str::title(str_replace('-', ' ', $pathParts->get(3)));
             $this->appendToCrumbs($lens, $pathParts->slice(0, 4)->implode('/'));
-        } elseif ($pathParts->has(2) && method_exists($this->model,"breadcrumbResourceTitle")) {
+        } elseif ($pathParts->has(2) && method_exists($this->model, 'breadcrumbResourceTitle')) {
             $this->resource = Nova::resourceForKey($pathParts->get(1));
             $this->model = $this->findResourceOrFail($pathParts->get(2));
 
