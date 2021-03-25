@@ -32,6 +32,7 @@ class ToolServiceProvider extends ServiceProvider
         }
 
         Route::middleware(['nova', Authorize::class])
+            ->domain(config('nova.domain', null))
             ->prefix('nova-vendor/chris-ware/nova-breadcrumbs')
             ->group(__DIR__ . '/../routes/api.php');
     }
