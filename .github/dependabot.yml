@@ -3,7 +3,7 @@ registries:
   composer-repository-nova-laravel-com:
     type: composer-repository
     url: https://nova.laravel.com
-    username: hello@morphsites.com
+    username: "${{secrets.COMPOSER_REPOSITORY_NOVA_LARAVEL_COM_USERNAME}}"
     password: "${{secrets.COMPOSER_REPOSITORY_NOVA_LARAVEL_COM_PASSWORD}}"
 
 updates:
