@@ -34,7 +34,7 @@ class NovaBreadcrumbsController extends Controller
             ->explode('/')
             ->filter();
 
-        $this->appendToCrumbs('Home', '/');
+        $this->appendToCrumbs(__('Home'), '/');
 
         if ($request->has('query') && ($query = collect($request->get('query'))->filter()) && $query->count() > 1) {
             $cloneParts = clone $pathParts;
