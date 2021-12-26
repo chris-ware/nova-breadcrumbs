@@ -2,7 +2,7 @@
     <nav v-if="this.breadcrumbs != null">
         <ul v-if="breadcrumbs" class="breadcrumbs">
             <li v-for="breadcrumb in breadcrumbs" class="breadcrumbs__item">
-                <router-link v-if="breadcrumb.path != null" :to="breadcrumb.path">
+                <router-link v-if="breadcrumb.path != null && breadcrumb.title != customResource[0]" :to="breadcrumb.path">
                     {{ __(breadcrumb.title) }}
                 </router-link>
                 <span v-else>{{ __(breadcrumb.title) }}</span>
@@ -16,7 +16,10 @@ export default {
     props: ['dashboardName'],
     data: function () {
         return {
-            breadcrumbs: null
+            breadcrumbs: null,
+            customResource:[
+                'Clinic'
+            ]
         };
     },
     methods: {
