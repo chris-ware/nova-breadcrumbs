@@ -22,7 +22,7 @@ class NovaBreadcrumbsController extends Controller
     public function __invoke(Request $request)
     {
         $this->crumbs = new Collection();
-        
+
         $view = Str::of($request->get('view'))->replace('-', ' ')->after('custom-');
 
         $pathParts = Str::of($request->input('location.href'))
