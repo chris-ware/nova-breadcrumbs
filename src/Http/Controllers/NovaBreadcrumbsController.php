@@ -56,7 +56,7 @@ class NovaBreadcrumbsController extends Controller
                 }
                 $additionals = $this->model->customBreadcrumbs();
                 if (empty($additionals) == false) {
-                    foreach($additionals as $additional) {
+                    foreach ($additionals as $additional) {
                         if (empty($additional['label']) == false) {
                             $this->appendToCrumbs($additional['label'], $additional['url'] ?? '#');
                         }
